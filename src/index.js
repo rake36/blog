@@ -9,9 +9,11 @@ import promise from 'redux-promise';
 import reducers from './reducers';
 import PostsIndex from './components/posts_index';
 import PostsNew from './components/posts_new';
+import PostsShow from './components/posts_show';
 
 // npm install --save react-router-dom@4.0.0
 // npm install --save axios redux-promise
+// npm install --save redux-form@6.6.3
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
@@ -32,9 +34,9 @@ ReactDOM.render(
         <Switch>
           {/* Most Specific First */}
           <Route path="/posts/new" component={PostsNew} />
+          <Route path="/posts/:id" component={PostsShow} />
           <Route path="/" component={PostsIndex} />
         </Switch>
-        {/* <Route path="/posts/:id" component={PostsShow} /> */}
 
         {/* <Route path="/hello" component={Hello} /> */}
         {/* <Route path="/goodbye" component={Goodbye} /> */}
