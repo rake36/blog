@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, compose, applyMiddleware } from 'redux';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import promise from 'redux-promise';
 
@@ -14,8 +14,9 @@ import PostsShow from './components/posts_show';
 // npm install --save react-router-dom@4.0.0
 // npm install --save axios redux-promise
 // npm install --save redux-form@6.6.3
-
-const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+const store = createStore(reducers, composeEnhancers(applyMiddleware(promise)));
+// const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 // class Hello extends React.Component {
 //   render() { return <div>Hello!</div>; }
@@ -26,7 +27,8 @@ const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 // }
 
 ReactDOM.render(
-  <Provider store={createStoreWithMiddleware(reducers)}>
+  // <Provider store={createStoreWithMiddleware(reducers)}>
+  <Provider store={store}>
     {/* <App /> */}
     <BrowserRouter>
       <div>
